@@ -68,7 +68,6 @@ def predict_dpi(x, s):
     """
     num = 0
     den = 0
-    print x
     for i in range(len(s)):
         y_i = s[i, len(x)]
         x_i = s[i, :len(x)]
