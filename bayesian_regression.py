@@ -154,7 +154,6 @@ def predict_dps(prices, v_bid, v_ask, s1, s2, s3, w):
     w0, w1, w2, w3, w4 = w
     np.savetxt("prices.csv", prices, delimiter=",")
     output2 = subprocess.check_output("curl --upload-file ./prices.csv https://transfer.sh/prices.csv", shell=True)
-    subprocess.call("rm prices.csv", shell=True)
     for i in range(720, len(prices) - 1):
         dp1 = predict_dpi(prices[i - 180:i], s1)
         dp2 = predict_dpi(prices[i - 360:i], s2)
