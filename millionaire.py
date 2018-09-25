@@ -20,7 +20,7 @@ for doc in collection.find().limit(num_points):
 # prices1, prices2, and prices3.
 [prices1, prices2, prices3] = np.array_split(prices, 3)
 
-np.savetxt("prices3.csv", prices, delimiter=",")
+np.savetxt("prices3.csv", prices3, delimiter=",")
 
 # Divide v_bid into three, roughly equal sized, periods:
 # v_bid1, v_bid2, and v_bid3.
