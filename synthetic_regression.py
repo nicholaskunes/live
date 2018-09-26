@@ -182,18 +182,18 @@ def evaluate_performance(prices, dps, t, step):
     position = 0
     trade_count = 0
     for i in range(720, (720 + 360), step):
-	time.sleep(1)
-	print dps[i - 720]
         # long position - BUY
         if dps[i - 720] > t and position <= 0:
             position += 1
             bank_balance -= prices[i]
 	    trade_count += 1
+	    print "[synth BUY] @ $" + str(prices[i]) + "with d_p " + str(dps[i - 720]) + " on iteration " + str((i - 720)) + " balance: $" + str(bank_balance)
         # short position - SELL
         if dps[i - 720] < -t and position >= 0:
             position -= 1
             bank_balance += prices[i]
 	    trade_count += 1
+	    print "[synth SELL] @ $" + str(prices[i]) + "with d_p " + str(dps[i - 720]) + " on iteration " + str((i - 720)) + " balance: $" + str(bank_balance)
     # sell what you bought
     if position == 1:
         bank_balance += prices[len(prices) - 1]
