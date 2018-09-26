@@ -86,7 +86,7 @@ while True:
     			position -= 1
     			balance += curprice
 			print "[" + str(iterator) + " SELL] " + str(datetime.now()) + " predict t+10s Δp " + str(end) + " $" + str(round(balance, 5))
-		time.sleep(30)
+		time.sleep(15)
 		
 	ticker = requests.get('https://api.gdax.com/products/BTC-USD/ticker').json()
 
