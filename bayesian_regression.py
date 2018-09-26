@@ -130,7 +130,7 @@ def find_parameters_w(X, Y):
     return w0, w1, w2, w3, w4
 
 
-def predict_dps(prices, v_bid, v_ask, s1, s2, s3, w):
+def predict(prices, v_bid, v_ask, s1, s2, s3, w):
     """Predict average price changes (final estimations Δp) over the third
        time period.
 
@@ -150,18 +150,13 @@ def predict_dps(prices, v_bid, v_ask, s1, s2, s3, w):
         A numpy array of floats. Each array element represents the final
         estimation Δp.
     """
-    dps = []
     w0, w1, w2, w3, w4 = w
-    np.savetxt("prices.csv", prices, delimiter=",")
-    output2 = subprocess.check_output("curl --upload-file ./prices.csv https://transfer.sh/prices.csv", shell=True)
-    for i in range(720, len(prices) - 1):
-        dp1 = predict_dpi(prices[i - 180:i], s1)
-        dp2 = predict_dpi(prices[i - 360:i], s2)
-        dp3 = predict_dpi(prices[i - 720:i], s3)
-        r = (v_bid[i] - v_ask[i]) / (v_bid[i] + v_ask[i])
-        dp = w0 + w1 * dp1 + w2 * dp2 + w3 * dp3 + w4 * r
-        dps.append(float(dp))
-    return dps
+    dp1 = predict_dpi(prices[(len(prices) - 1) - 180:len(prices) - 1], s1)
+    dp2 = predict_dpi(prices[(len(prices) - 1) - 360:len(prices) - 1], s2)
+    dp3 = predict_dpi(prices[(len(prices) - 1) - 720:len(prices) - 1], s3)
+    r = (v_bid[len(prices) - 1] - v_ask[len(prices) - 1]) / (v_bid[len(prices) - 1] + v_ask[len(prices) - 1])
+    dp = w0 + w1 * dp1 + w2 * dp2 + w3 * dp3 + w4 * r
+    return dp
 
 
 def evaluate_performance(prices, dps, t, step):
