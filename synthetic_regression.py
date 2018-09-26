@@ -67,7 +67,6 @@ def predict_dpi(x, s):
     """
     num = 0
     den = 0
-    print x
     for i in range(len(s)):
         y_i = s[i, len(x)]
         x_i = s[i, :len(x)]
@@ -195,5 +194,5 @@ def evaluate_performance(prices, dps, t, step):
     # pay back what you borrowed
     if position == -1:
         bank_balance -= prices[len(prices) - 1]
-    print trade_count  
+    print "trade_count: " + str(trade_count)
     return bank_balance
