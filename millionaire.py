@@ -66,12 +66,13 @@ while True:
 		[v_ask1, v_ask2, v_ask3] = np.array_split(v_ask, 3)
 
 	        end = predict(prices3, v_bid3, v_ask3, s1, s2, s3, w)
+		endf = predict_flawed(prices3, v_bid3, v_ask3, s1, s2, s3, w)
 		
 		ticker = requests.get('https://api.gdax.com/products/BTC-USD/ticker').json()
 		curprice = float(ticker['price'])
 		prices4.append(curprice)
 		
-		print "change_variables = [ price: " + str(curprice) + " Δp " + str(end) + " ]"
+		print "time: " + str(datetime.now()) + "change_variables = [ price: " + str(curprice) + " Δp " + str(end) + " Δp_f " + str(endf) + " ]"
 		
         	# BUY
     		if end > 0.35 and position <= 0:
