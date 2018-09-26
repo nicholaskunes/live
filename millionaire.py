@@ -44,7 +44,6 @@ while True:
 
 	w = find_parameters_w(Dpi_r, Dp)
 
-	np.savetxt("btc.csv", dps, delimiter=",")
 	prices4 = []
 	iterator = 0
 	completion = 0
