@@ -7,6 +7,7 @@ at https://arxiv.org/pdf/1410.1231.pdf.
 """
 import numpy as np
 import bigfloat as bg
+import time
 from numpy.linalg import norm
 from sklearn import linear_model
 from sklearn.cluster import KMeans
@@ -158,6 +159,7 @@ def predict_dps(prices, v_bid, v_ask, s1, s2, s3, w):
         r = (v_bid[i] - v_ask[i]) / (v_bid[i] + v_ask[i])
         dp = w0 + w1 * dp1 + w2 * dp2 + w3 * dp3 + w4 * r
         dps.append(float(dp))
+    np.savetxt("dps.csv", dps, delimiter=",")
     return dps
 
 
@@ -178,6 +180,7 @@ def evaluate_performance(prices, dps, t, step):
     position = 0
     trade_count = 0
     for i in range(720, len(prices) - 1, step):
+	time.sleep(1)
         # long position - BUY
         if dps[i - 720] > t and position <= 0:
             position += 1
