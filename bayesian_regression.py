@@ -151,9 +151,9 @@ def predict(prices, v_bid, v_ask, s1, s2, s3, w):
         estimation Δp.
     """
     w0, w1, w2, w3, w4 = w
-    dp1 = predict_dpi(prices[(len(prices) - 1) - 180:len(prices) - 1], s1)
-    dp2 = predict_dpi(prices[(len(prices) - 1) - 360:len(prices) - 1], s2)
-    dp3 = predict_dpi(prices[(len(prices) - 1) - 720:len(prices) - 1], s3)
+    dp1 = predict_dpi(prices[(len(prices) - 1) - 180:len(prices)], s1)
+    dp2 = predict_dpi(prices[(len(prices) - 1) - 360:len(prices)], s2)
+    dp3 = predict_dpi(prices[(len(prices) - 1) - 720:len(prices)], s3)
     r = (v_bid[len(prices) - 1] - v_ask[len(prices) - 1]) / (v_bid[len(prices) - 1] + v_ask[len(prices) - 1])
     dp = w0 + w1 * dp1 + w2 * dp2 + w3 * dp3 + w4 * r
     return dp
