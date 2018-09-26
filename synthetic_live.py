@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
-from bayesian_regression import *
+from synthetic_regression import *
 
 client = MongoClient()
 database = client['predictor']
