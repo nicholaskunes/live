@@ -181,7 +181,7 @@ def evaluate_performance(prices, dps, t, step):
     bank_balance = 0
     position = 0
     trade_count = 0
-    for i in range(720, (720 + 240), step):
+    for i in range(720, (720 + 360), step):
 	time.sleep(1)
 	print dps[i - 720]
         # long position - BUY
