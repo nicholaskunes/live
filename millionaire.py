@@ -74,13 +74,13 @@ while True:
 		print "change_variables = [ price: " + str(curprice) + " Δp " + str(end) + " ]"
 		
         	# BUY
-    		if end > 0.15 and position <= 0:
+    		if end > 0.35 and position <= 0:
 			iterator += 1
     			position += 1
     		        balance -= curprice
 			print "[" + str(iterator) + " BUY] " + str(datetime.now()) + " predict t+10s Δp " + str(end) + " $" + str(round(balance, 5))
         	# SELL
-    		if end < -0.15 and position >= 0:
+    		if end < -0.35 and position >= 0:
 			iterator += 1
     			position -= 1
     			balance += curprice
