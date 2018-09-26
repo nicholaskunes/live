@@ -180,7 +180,7 @@ def evaluate_performance(prices, dps, t, step):
     position = 0
     trade_count = 0
     for i in range(720, len(prices) - 1, step):
-	#time.sleep(1)
+	time.sleep(1)
         # long position - BUY
         if dps[i - 720] > t and position <= 0:
             position += 1
