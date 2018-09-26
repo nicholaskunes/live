@@ -66,7 +66,7 @@ while True:
 		[v_bid1, v_bid2, v_bid3] = np.array_split(v_bid, 3)
 		[v_ask1, v_ask2, v_ask3] = np.array_split(v_ask, 3)
 
-        end = predict(prices3, v_bid3, v_ask3, s1, s2, s3, w)
+	        end = predict(prices3, v_bid3, v_ask3, s1, s2, s3, w)
 		
 		ticker = requests.get('https://api.gdax.com/products/BTC-USD/ticker').json()
 		curprice = float(ticker['price'])
