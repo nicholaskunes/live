@@ -23,9 +23,13 @@ while True:
 		v_ask.append(doc['v_ask'])
 		v_bid.append(doc['v_bid'])
 
-	[prices1, prices2, prices3] = np.array_split(prices, 3)
-	[v_bid1, v_bid2, v_bid3] = np.array_split(v_bid, 3)
-	[v_ask1, v_ask2, v_ask3] = np.array_split(v_ask, 3)
+	[prices1, prices2] = np.array_split(prices, 2)
+	[v_bid1, v_bid2] = np.array_split(v_bid, 2)
+	[v_ask1, v_ask2] = np.array_split(v_ask, 2)
+	
+	[pfluke1, pfluke2, pfluke3] = np.array_split(prices, 3)
+	[bfluke1, bfluke2, bfluke3] = np.array_split(v_bid, 3)
+	[afluke1, afluke2, afluke3] = np.array_split(v_ask, 3)
 	
 	timeseries180 = generate_timeseries(prices1, 180)
 	timeseries360 = generate_timeseries(prices1, 360)
@@ -65,8 +69,8 @@ while True:
 		[v_bid1, v_bid2, v_bid3] = np.array_split(v_bid, 3)
 		[v_ask1, v_ask2, v_ask3] = np.array_split(v_ask, 3)
 
-	        end = predict(prices3, v_bid3, v_ask3, s1, s2, s3, w)
-		endf = predict_flawed(prices3, v_bid3, v_ask3, s1, s2, s3, w)
+	        end = predict(prices2, v_bid2, v_ask2, s1, s2, s3, w)
+		endf = predict_flawed(pfluke3, bfluke3, afluke3, s1, s2, s3, w)
 		
 		ticker = requests.get('https://api.gdax.com/products/BTC-USD/ticker').json()
 		curprice = float(ticker['price'])
@@ -75,13 +79,13 @@ while True:
 		print "time: " + str(datetime.now()) + "change_variables = [ price: " + str(curprice) + " Δp " + str(end) + " Δp_f " + str(endf) + " ]"
 		
         	# BUY
-    		if end > 0.35 and position <= 0:
+    		if end > 0.15 and position <= 0:
 			iterator += 1
     			position += 1
     		        balance -= curprice
 			print "[" + str(iterator) + " BUY] " + str(datetime.now()) + " predict t+10s Δp " + str(end) + " $" + str(round(balance, 5))
         	# SELL
-    		if end < -0.35 and position >= 0:
+    		if end < -0.15 and position >= 0:
 			iterator += 1
     			position -= 1
     			balance += curprice
