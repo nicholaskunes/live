@@ -23,17 +23,13 @@ while True:
 		v_ask.append(doc['v_ask'])
 		v_bid.append(doc['v_bid'])
 
-	[prices1, prices2] = np.array_split(prices, 2)
-	[v_bid1, v_bid2] = np.array_split(v_bid, 2)
-	[v_ask1, v_ask2] = np.array_split(v_ask, 2)
+	[tprices1, tprices2] = np.array_split(prices, 2)
+	[tv_bid1, tv_bid2] = np.array_split(v_bid, 2)
+	[tv_ask1, tv_ask2] = np.array_split(v_ask, 2)
 	
-	[pfluke1, pfluke2, pfluke3] = np.array_split(prices, 3)
-	[bfluke1, bfluke2, bfluke3] = np.array_split(v_bid, 3)
-	[afluke1, afluke2, afluke3] = np.array_split(v_ask, 3)
-	
-	timeseries180 = generate_timeseries(prices1, 180)
-	timeseries360 = generate_timeseries(prices1, 360)
-	timeseries720 = generate_timeseries(prices1, 720)
+	timeseries180 = generate_timeseries(tprices1, 180)
+	timeseries360 = generate_timeseries(tprices1, 360)
+	timeseries720 = generate_timeseries(tprices1, 720)
 	
 	centers180 = find_cluster_centers(timeseries180, 100)
 	s1 = choose_effective_centers(centers180, 20)
@@ -44,7 +40,7 @@ while True:
 	centers720 = find_cluster_centers(timeseries720, 100)
 	s3 = choose_effective_centers(centers720, 20)
 
-	Dpi_r, Dp = linear_regression_vars(prices2, v_bid2, v_ask2, s1, s2, s3)
+	Dpi_r, Dp = linear_regression_vars(tprices2, tv_bid2, tv_ask2, s1, s2, s3)
 
 	w = find_parameters_w(Dpi_r, Dp)
 
@@ -64,10 +60,14 @@ while True:
 			prices.append(doc['price'])
 			v_ask.append(doc['v_ask'])
 			v_bid.append(doc['v_bid'])
-
-		[prices1, prices2, prices3] = np.array_split(prices, 3)
-		[v_bid1, v_bid2, v_bid3] = np.array_split(v_bid, 3)
-		[v_ask1, v_ask2, v_ask3] = np.array_split(v_ask, 3)
+			
+		[prices1, prices2] = np.array_split(prices, 2)
+		[v_bid1, v_bid2] = np.array_split(v_bid, 2)
+		[v_ask1, v_ask2] = np.array_split(v_ask, 2)
+	
+		[pfluke1, pfluke2, pfluke3] = np.array_split(prices, 3)
+		[bfluke1, bfluke2, bfluke3] = np.array_split(v_bid, 3)
+		[afluke1, afluke2, afluke3] = np.array_split(v_ask, 3)
 
 	        end = predict(prices2, v_bid2, v_ask2, s1, s2, s3, w)
 		endf = predict_flawed(pfluke3, bfluke3, afluke3, s1, s2, s3, w)
