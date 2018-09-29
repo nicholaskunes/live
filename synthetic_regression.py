@@ -202,8 +202,8 @@ def evaluate_performance(prices, dps, t, step):
 	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
 	        	"    [PTP]  " + str(prev_pos) + "\n"
 			"    ]\n"
-	    	)
-		continue
+	    	 )
+		 continue
             position += 1
             prior_balance = bank_balance
             bank_balance -= prices[i]
@@ -234,8 +234,8 @@ def evaluate_performance(prices, dps, t, step):
 	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
 	        	"    [PTP]  " + str(prev_pos) + "\n"
 			"    ]\n"
-	    	)
-		continue
+	    	 )
+		 continue
             position -= 1
 	    prior_balance = bank_balance
             bank_balance += prices[i]
