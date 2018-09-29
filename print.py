@@ -1,0 +1,7 @@
+print "[bayesian regression clustered prediction algorithm]"
+print "---------- [def key]"
+print "---------- [    PPB] POSTED PRIOR BALANCE: the prev. balance prior to the the cur. trade"
+print "---------- [    CPB] CUR. POSTED BALANCE: the cur. balance subsequent to the the cur. trade"
+print "---------- [    PTV] PREV. TRADE VALUE: the prev. trade currency value"
+print "---------- [    PTT] PREV. TRADE POSITION: the prev. trade position (e.g. LONG or SHORT)"
+print "---------- [end key]"
