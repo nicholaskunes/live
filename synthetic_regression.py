@@ -174,6 +174,7 @@ def evaluate_performance(prices, dps, t, step):
         A number representing the bank balance.
     """
     bank_balance = 0
+    fees_paid = 0
     position = 0
     trade_count = 0
     prev_pos = "NONE"
@@ -205,22 +206,10 @@ def evaluate_performance(prices, dps, t, step):
 			"    ]\n"
 	    	 )
 		 continue
-	    #6300 - 6200
-	    if ((prior_value - (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075))) <= 0 and prev_pos == "SHORT":
-	   	 print(
-	        	"[synthetic LONG INSIG GATE-2 (-)CTF\n"
-	        	"    [ITR]  " + str(i - 720) + "\n"
-	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
-	       	 	"    [PTV] $" + str(prior_value) + "\n"
-	        	"    [CTV] $" + str(prices[i]) + "\n"
-	        	"    [PTP]  " + str(prev_pos) + "\n"
-			"    [CTF]  " + str(((prior_value - (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075)))) + "\n"
-			"    ]\n"
-	    	 )
-		 continue
             position += 1
             prior_balance = bank_balance
-            bank_balance -= prices[i]
+            bank_balance -= (prices[i] + (prices[i] * 0.00075))
+	    fees_paid += (prices[i] * 0.00075)
 	    trade_count += 1
 	    insig = "SIGNIF"
 	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075:
@@ -250,21 +239,10 @@ def evaluate_performance(prices, dps, t, step):
 			"    ]\n"
 	    	 )
 		 continue
-	    if ((prior_value + (prior_value * 0.00075)) - (prices[i] - (prices[i] * 0.00075))) >= 0 and prev_pos == "LONG":
-	   	 print(
-	        	"[synthetic SHORT INSIG GATE-2 (+)CTF\n"
-	        	"    [ITR]  " + str(i - 720) + "\n"
-	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
-	        	"    [PTV] $" + str(prior_value) + "\n"
-	        	"    [CTV] $" + str(prices[i]) + "\n"
-	        	"    [PTP]  " + str(prev_pos) + "\n"
-			"    [CTF]  " + str(((prior_value + (prior_value * 0.00075)) - (prices[i] - (prices[i] * 0.00075)))) + "\n"
-			"    ]\n"
-	    	 )
-		 continue
             position -= 1
 	    prior_balance = bank_balance
-            bank_balance += prices[i]
+            bank_balance += (prices[i] + (prices[i] * 0.00075))
+	    fees_paid += (prices[i] * 0.00075)
 	    trade_count += 1
 	    insig = "SIGNIF"
 	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075:
@@ -289,5 +267,13 @@ def evaluate_performance(prices, dps, t, step):
     # pay back what you borrowed
     if position == -1:
         bank_balance -= prices[len(prices) - 1]
-    print "trade_count: " + str(trade_count)
+    print(
+	"[series statistics " + insig + "\n"
+	"    [length]  " + str(((i - 720) * 10) / 60) + " min.\n"
+	"    [profit] $" + str(bank_balance) + "\n"
+	"    [fees paid] $" + str(fees_paid) + "\n"
+	"    [revenue] $" + str((fees_paid + bank_balance)) + "\n"
+	"    [trades exec.] " + str(trade_count) + "\n"
+	"    ]\n"
+    )
     return bank_balance
