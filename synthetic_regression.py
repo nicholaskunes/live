@@ -204,7 +204,8 @@ def evaluate_performance(prices, dps, t, step):
 			"    ]\n"
 	    	 )
 		 continue
-	    if ((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075))) <= 0 and prev_pos == "SHORT":
+	    #6300 - 6200
+	    if ((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075))) >= 0 and prev_pos == "SHORT":
 	   	 print(
 	        	"[synthetic LONG INSIG GATE-2\n"
 	        	"    [ITR]  " + str(i - 720) + "\n"
@@ -238,14 +239,14 @@ def evaluate_performance(prices, dps, t, step):
         if dps[i - 720] < -t and position >= 0:
 	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075 and prev_pos != "SHORT":
 	   	 print(
-	        	"[synthetic SHORT INSIG\n"
+	        	"[synthetic SHORT INSIG GATE-1\n"
 	        	"    [ITR]  " + str(i - 720) + "\n"
 	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
 	        	"    [PTP]  " + str(prev_pos) + "\n"
 			"    ]\n"
 	    	 )
 		 continue
-	    if ((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075))) >= 0 and prev_pos == "LONG":
+	    if ((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075))) <= 0 and prev_pos == "LONG":
 	   	 print(
 	        	"[synthetic SHORT INSIG GATE-2\n"
 	        	"    [ITR]  " + str(i - 720) + "\n"
