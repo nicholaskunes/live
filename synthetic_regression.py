@@ -214,7 +214,7 @@ def evaluate_performance(prices, dps, t, step):
 	       	 	"    [PTV] $" + str(prior_value) + "\n"
 	        	"    [CTV] $" + str(prices[i]) + "\n"
 	        	"    [PTP]  " + str(prev_pos) + "\n"
-			"    [CTF]  " + str(((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075)))) + "\n"
+			"    [CTF]  " + str(((prior_value - (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075)))) + "\n"
 			"    ]\n"
 	    	 )
 		 continue
@@ -258,7 +258,7 @@ def evaluate_performance(prices, dps, t, step):
 	        	"    [PTV] $" + str(prior_value) + "\n"
 	        	"    [CTV] $" + str(prices[i]) + "\n"
 	        	"    [PTP]  " + str(prev_pos) + "\n"
-			"    [CTF]  " + str(((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075)))) + "\n"
+			"    [CTF]  " + str(((prior_value + (prior_value * 0.00075)) - (prices[i] - (prices[i] * 0.00075)))) + "\n"
 			"    ]\n"
 	    	 )
 		 continue
