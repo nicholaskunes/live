@@ -200,13 +200,13 @@ def evaluate_performance(prices, dps, t, step):
 	    trade_count += 1
 	    print(
 	        "[synthetic LONG\n"
-	        "    [ITR] $" + str(i - 720) + "\n"
+	        "    [ITR]  " + str(i - 720) + "\n"
 	        "    [PPB] $" + str(prior_balance) + "\n"
 	        "    [PTV] $" + str(prior_value) + "\n"
 	        "    [CTV] $" + str(prices[i]) + "\n"
 	        "    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
-	        "    [PCS] $" + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])) * 100)) + "\n"
-	        "    [PTP] " + str(prev_pos) + "\n"
+	        "    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])) * 100)) + "\n"
+	        "    [PTP]  " + str(prev_pos) + "\n"
 	        "    [CPB] $" + str(bank_balance) + "\n"
 		"    ]\n"
 	    )
@@ -220,13 +220,13 @@ def evaluate_performance(prices, dps, t, step):
 	    trade_count += 1
 	    print(
 	        "[synthetic SHORT\n"
-	        "    [ITR] $" + str(i - 720) + "\n"
+	        "    [ITR]  " + str(i - 720) + "\n"
 	        "    [PPB] $" + str(prior_balance) + "\n"
 	        "    [PTV] $" + str(prior_value) + "\n"
 	        "    [CTV] $" + str(prices[i]) + "\n"
 	        "    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
-	        "    [PCS] $" + str((abs(float(prior_value) - float(prices[i])) / float(prices[i]) * 100)) + "\n"
-	        "    [PTP] " + str(prev_pos) + "\n"
+	        "    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])) * 100)) + "\n"
+	        "    [PTP]  " + str(prev_pos) + "\n"
 	        "    [CPB] $" + str(bank_balance) + "\n"
 		"    ]\n"
 	    )
