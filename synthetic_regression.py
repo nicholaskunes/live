@@ -12,7 +12,6 @@ from numpy.linalg import norm
 from sklearn import linear_model
 from sklearn.cluster import KMeans
 
-
 def generate_timeseries(prices, n):
     """Use the first time period to generate all possible time series of length n
        and their corresponding label.
@@ -153,9 +152,6 @@ def predict_dps(prices, v_bid, v_ask, s1, s2, s3, w):
     dps = []
     w0, w1, w2, w3, w4 = w
     for i in range(720, len(prices) - 1):
-	#np.savetxt("prices.csv", prices, delimiter=",")
-	#np.savetxt("prices_sliced.csv", prices[i - 180:i], delimiter=",")
-	#raise SystemExit(0)
         dp1 = predict_dpi(prices[i - 180:i], s1)
         dp2 = predict_dpi(prices[i - 360:i], s2)
         dp3 = predict_dpi(prices[i - 720:i], s3)
@@ -163,7 +159,6 @@ def predict_dps(prices, v_bid, v_ask, s1, s2, s3, w):
         dp = w0 + w1 * dp1 + w2 * dp2 + w3 * dp3 + w4 * r
         dps.append(float(dp))
     return dps
-
 
 def evaluate_performance(prices, dps, t, step):
     """Use the third time period to evaluate the performance of the algorithm.
