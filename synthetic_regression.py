@@ -190,6 +190,7 @@ def evaluate_performance(prices, dps, t, step):
     print "---------- [    PCS] PRICE CHANGE SIGNIFICANCE: the significance of the PCD [PCS = (PCD / CTV)]"
     print "---------- [    PTV] PREV. TRADE VALUE: the prev. trade currency value"
     print "---------- [    PTP] PREV. TRADE POSITION: the prev. trade position (e.g. LONG or SHORT)"
+    print "---------- [    CTF] TRADE FEE DIFF.: the prev. position trade fee added to the cur. to-be-executed trade fee"
     print "---------- [end key]"
 	
     for i in range(720, len(prices) - 1, step):
@@ -205,14 +206,15 @@ def evaluate_performance(prices, dps, t, step):
 	    	 )
 		 continue
 	    #6300 - 6200
-	    if ((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075))) >= 0 and prev_pos == "SHORT":
+	    if ((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075))) <= 0 and prev_pos == "SHORT":
 	   	 print(
-	        	"[synthetic LONG INSIG GATE-2\n"
+	        	"[synthetic LONG INSIG GATE-2 (-)CTF\n"
 	        	"    [ITR]  " + str(i - 720) + "\n"
 	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
 	       	 	"    [PTV] $" + str(prior_value) + "\n"
 	        	"    [CTV] $" + str(prices[i]) + "\n"
 	        	"    [PTP]  " + str(prev_pos) + "\n"
+			"    [CTF]  " + str(((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075)))) + "\n"
 			"    ]\n"
 	    	 )
 		 continue
@@ -248,14 +250,15 @@ def evaluate_performance(prices, dps, t, step):
 			"    ]\n"
 	    	 )
 		 continue
-	    if ((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075))) <= 0 and prev_pos == "LONG":
+	    if ((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075))) >= 0 and prev_pos == "LONG":
 	   	 print(
-	        	"[synthetic SHORT INSIG GATE-2\n"
+	        	"[synthetic SHORT INSIG GATE-2 (+)CTF\n"
 	        	"    [ITR]  " + str(i - 720) + "\n"
 	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
 	        	"    [PTV] $" + str(prior_value) + "\n"
 	        	"    [CTV] $" + str(prices[i]) + "\n"
 	        	"    [PTP]  " + str(prev_pos) + "\n"
+			"    [CTF]  " + str(((prior_value + (prior_value * 0.00075)) - (prices[i] + (prices[i] * 0.00075)))) + "\n"
 			"    ]\n"
 	    	 )
 		 continue
