@@ -160,7 +160,7 @@ def predict_dps(prices, v_bid, v_ask, s1, s2, s3, w):
         dps.append(float(dp))
     return dps
 
-def evaluate_performance(prices, dps, t, step):
+def evaluate_performance(start_price, prices, dps, t, step):
     """Use the third time period to evaluate the performance of the algorithm.
 
     Args:
@@ -177,7 +177,7 @@ def evaluate_performance(prices, dps, t, step):
     position = 0
     trade_count = 0
     prev_pos = "NONE"
-    prior_value = "NONE"
+    prior_value = start_price
 	
     print "[bayesian regression clustered prediction algorithm]"
     print "---------- [def key]"
@@ -205,7 +205,7 @@ def evaluate_performance(prices, dps, t, step):
 	        "    [PTV] $" + str(prior_value) + "\n"
 	        "    [CTV] $" + str(prices[i]) + "\n"
 	        "    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
-	        "    [PCS] $" + str((abs(float(prior_value) - float(prices[i])) / float(prices[i]) * 100)) + "\n"
+	        "    [PCS] $" + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])) * 100)) + "\n"
 	        "    [PTP] " + str(prev_pos) + "\n"
 	        "    [CPB] $" + str(bank_balance) + "\n"
 		"    ]\n"
