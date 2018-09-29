@@ -210,6 +210,8 @@ def evaluate_performance(prices, dps, t, step):
 	        	"[synthetic LONG INSIG GATE-2\n"
 	        	"    [ITR]  " + str(i - 720) + "\n"
 	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	       	 	"    [PTV] $" + str(prior_value) + "\n"
+	        	"    [CTV] $" + str(prices[i]) + "\n"
 	        	"    [PTP]  " + str(prev_pos) + "\n"
 			"    ]\n"
 	    	 )
@@ -251,6 +253,8 @@ def evaluate_performance(prices, dps, t, step):
 	        	"[synthetic SHORT INSIG GATE-2\n"
 	        	"    [ITR]  " + str(i - 720) + "\n"
 	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        	"    [PTV] $" + str(prior_value) + "\n"
+	        	"    [CTV] $" + str(prices[i]) + "\n"
 	        	"    [PTP]  " + str(prev_pos) + "\n"
 			"    ]\n"
 	    	 )
