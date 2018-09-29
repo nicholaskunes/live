@@ -181,8 +181,12 @@ def evaluate_performance(prices, dps, t, step):
 	
     print "[bayesian regression clustered prediction algorithm]"
     print "---------- [def key]"
+    print "---------- [    ITR] ITERATION: the cur. sequence of the iterator"
     print "---------- [    PPB] POSTED PRIOR BALANCE: the prev. balance prior to the the cur. trade"
     print "---------- [    CPB] CUR. POSTED BALANCE: the cur. balance subsequent to the the cur. trade"
+    print "---------- [    CTV] CUR. TRADE VALUE: the cur. trade currency value"
+    print "---------- [    PCD] PRICE CHANGE DIFF.: the magnitude of change between the prev. trade value and the cur. [PCD = abs(PTV - CTV)]"
+    print "---------- [    PCS] PRICE CHANGE SIGNIFICANCE: the significance of the PCD [PCS = (PCD / CTV) * 100]"
     print "---------- [    PTV] PREV. TRADE VALUE: the prev. trade currency value"
     print "---------- [    PTP] PREV. TRADE POSITION: the prev. trade position (e.g. LONG or SHORT)"
     print "---------- [end key]"
@@ -196,8 +200,12 @@ def evaluate_performance(prices, dps, t, step):
 	    trade_count += 1
 	    print(
 	        "[synthetic LONG\n"
+	        "    [ITR] $" + str(i - 720) + "\n"
 	        "    [PPB] $" + str(prior_balance) + "\n"
 	        "    [PTV] $" + str(prior_value) + "\n"
+	        "    [CTV] $" + str(prices[i]) + "\n"
+	        "    [PCD] $" + str(abs(prior_value - prices[i])) + "\n"
+	        "    [PCS] $" + str((abs(prior_value - prices[i]) * 100)) + "\n"
 	        "    [PTP] " + str(prev_pos) + "\n"
 	        "    [CPB] $" + str(bank_balance) + "\n"
 		"    ]\n"
