@@ -181,12 +181,13 @@ def evaluate_performance(prices, dps, t, step):
 	
     print "[bayesian regression clustered prediction algorithm]"
     print "---------- [def key]"
+    print "---------- [    INSIG] INSIGNIFICANCE: this flag is assigned if PCS < 0.00075, its complement is 'SIGNIF'"
     print "---------- [    ITR] ITERATION: the cur. sequence of the iterator"
     print "---------- [    PPB] POSTED PRIOR BALANCE: the prev. balance prior to the the cur. trade"
     print "---------- [    CPB] CUR. POSTED BALANCE: the cur. balance subsequent to the the cur. trade"
     print "---------- [    CTV] CUR. TRADE VALUE: the cur. trade currency value"
     print "---------- [    PCD] PRICE CHANGE DIFF.: the magnitude of change between the prev. trade value and the cur. [PCD = abs(PTV - CTV)]"
-    print "---------- [    PCS] PRICE CHANGE SIGNIFICANCE: the significance of the PCD [PCS = (PCD / CTV) * 100]"
+    print "---------- [    PCS] PRICE CHANGE SIGNIFICANCE: the significance of the PCD [PCS = (PCD / CTV)]"
     print "---------- [    PTV] PREV. TRADE VALUE: the prev. trade currency value"
     print "---------- [    PTP] PREV. TRADE POSITION: the prev. trade position (e.g. LONG or SHORT)"
     print "---------- [end key]"
@@ -198,14 +199,17 @@ def evaluate_performance(prices, dps, t, step):
             prior_balance = bank_balance
             bank_balance -= prices[i]
 	    trade_count += 1
+	    insig = "SIGNIF"
+	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075:
+		insig = "INSIG"
 	    print(
-	        "[synthetic LONG\n"
+	        "[synthetic LONG " + insig + "\n"
 	        "    [ITR]  " + str(i - 720) + "\n"
 	        "    [PPB] $" + str(prior_balance) + "\n"
 	        "    [PTV] $" + str(prior_value) + "\n"
 	        "    [CTV] $" + str(prices[i]) + "\n"
 	        "    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
-	        "    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])) * 100)) + "\n"
+	        "    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
 	        "    [PTP]  " + str(prev_pos) + "\n"
 	        "    [CPB] $" + str(bank_balance) + "\n"
 		"    ]\n"
@@ -218,14 +222,17 @@ def evaluate_performance(prices, dps, t, step):
 	    prior_balance = bank_balance
             bank_balance += prices[i]
 	    trade_count += 1
+	    insig = "SIGNIF"
+	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075:
+		insig = "INSIG"
 	    print(
-	        "[synthetic SHORT\n"
+	        "[synthetic SHORT " + insig + "\n"
 	        "    [ITR]  " + str(i - 720) + "\n"
 	        "    [PPB] $" + str(prior_balance) + "\n"
 	        "    [PTV] $" + str(prior_value) + "\n"
 	        "    [CTV] $" + str(prices[i]) + "\n"
 	        "    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
-	        "    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])) * 100)) + "\n"
+	        "    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
 	        "    [PTP]  " + str(prev_pos) + "\n"
 	        "    [CPB] $" + str(bank_balance) + "\n"
 		"    ]\n"
