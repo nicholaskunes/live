@@ -195,6 +195,15 @@ def evaluate_performance(prices, dps, t, step):
     for i in range(720, len(prices) - 1, step):
         # long position - BUY
         if dps[i - 720] > t and position <= 0:
+	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075 and prev_pos != "LONG":
+	   	 print(
+	        	"[synthetic LONG INSIG\n"
+	        	"    [ITR]  " + str(i - 720) + "\n"
+	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        	"    [PTP]  " + str(prev_pos) + "\n"
+			"    ]\n"
+	    	)
+		continue
             position += 1
             prior_balance = bank_balance
             bank_balance -= prices[i]
@@ -218,6 +227,15 @@ def evaluate_performance(prices, dps, t, step):
 	    prior_value = prices[i]
 	# short position - SELL
         if dps[i - 720] < -t and position >= 0:
+	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075 and prev_pos != "SHORT":
+	   	 print(
+	        	"[synthetic SHORT INSIG\n"
+	        	"    [ITR]  " + str(i - 720) + "\n"
+	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        	"    [PTP]  " + str(prev_pos) + "\n"
+			"    ]\n"
+	    	)
+		continue
             position -= 1
 	    prior_balance = bank_balance
             bank_balance += prices[i]
