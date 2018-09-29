@@ -176,20 +176,51 @@ def evaluate_performance(prices, dps, t, step):
     bank_balance = 0
     position = 0
     trade_count = 0
+    prev_pos = "NONE"
+    prior_value = "NONE"
+	
+    print "[bayesian regression clustered prediction algorithm]"
+    print "---------- [def key]"
+    print "---------- [    PPB] POSTED PRIOR BALANCE: the prev. balance prior to the the cur. trade"
+    print "---------- [    CPB] CUR. POSTED BALANCE: the cur. balance subsequent to the the cur. trade"
+    print "---------- [    PTV] PREV. TRADE VALUE: the prev. trade currency value"
+    print "---------- [    PTP] PREV. TRADE POSITION: the prev. trade position (e.g. LONG or SHORT)"
+    print "---------- [end key]"
+	
     for i in range(720, len(prices) - 1, step):
         # long position - BUY
         if dps[i - 720] > t and position <= 0:
             position += 1
+            prior_balance = bank_balance
             bank_balance -= prices[i]
 	    trade_count += 1
-	    print "[synth BUY] @ $" + str(prices[i]) + "with d_p " + str(dps[i - 720]) + " on iteration " + str((i - 720)) + " balance: $" + str(bank_balance)
-        # short position - SELL
+	    print(
+	        "[synthetic LONG\n"
+	        "    [PPB] $" + str(prior_balance) + "\n"
+	        "    [PTV] $" + str(prior_value) + "\n"
+	        "    [PTP] " + str(prev_pos) + "\n"
+	        "    [CPB] $" + str(bank_balance) + "\n"
+		"    ]\n"
+	    )
+	    prev_pos = "LONG"
+	    prior_value = prices[i]
+	# short position - SELL
         if dps[i - 720] < -t and position >= 0:
             position -= 1
+	    prior_balance = bank_balance
             bank_balance += prices[i]
 	    trade_count += 1
-	    print "[synth SELL] @ $" + str(prices[i]) + "with d_p " + str(dps[i - 720]) + " on iteration " + str((i - 720)) + " balance: $" + str(bank_balance)
-    # sell what you bought
+	    print(
+	        "[synthetic SHORT]\n"
+	        "    [PPB] $" + str(prior_balance) + "\n"
+	        "    [PTV] $" + str(prior_value) + "\n"
+	        "    [PTP] " + str(prev_pos) + "\n"
+	        "    [CPB] $" + str(bank_balance) + "\n"
+		"    ]\n"
+	    )
+	    prev_pos = "SHORT"
+	    prior_value = prices[i]
+	# sell what you bought
     if position == 1:
         bank_balance += prices[len(prices) - 1]
     # pay back what you borrowed
