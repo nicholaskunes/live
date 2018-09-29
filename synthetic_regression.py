@@ -241,7 +241,7 @@ def evaluate_performance(prices, dps, t, step):
 		 continue
             position -= 1
 	    prior_balance = bank_balance
-            bank_balance += (prices[i] + (prices[i] * 0.00075))
+            bank_balance += (prices[i] - (prices[i] * 0.00075))
 	    fees_paid += (prices[i] * 0.00075)
 	    trade_count += 1
 	    insig = "SIGNIF"
