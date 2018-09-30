@@ -268,7 +268,7 @@ def evaluate_performance(prices, dps, t, step):
     if position == -1:
         bank_balance -= prices[len(prices) - 1]
     print(
-	"[series statistics " + insig + "\n"
+	"[series statistics " + "\n"
 	"    [length]  " + str(((i - 720) * 10) / 60) + " min.\n"
 	"    [profit] $" + str(bank_balance) + "\n"
 	"    [fees paid] $" + str(fees_paid) + "\n"
