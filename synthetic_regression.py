@@ -199,11 +199,11 @@ def evaluate_performance(prices, dps, t, step):
         if dps[i - 720] > t and position <= 0:
 	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075 and prev_pos != "LONG":
 	   	 print(
-	        	"[synthetic LONG INSIG GATE-1\n"
-	        	"    [ITR]  " + str(i - 720) + "\n"
-	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
-	        	"    [PTP]  " + str(prev_pos) + "\n"
-			"    ]\n"
+	        	#"[synthetic LONG INSIG GATE-1\n"
+	        	#"    [ITR]  " + str(i - 720) + "\n"
+	        	#"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        	#"    [PTP]  " + str(prev_pos) + "\n"
+			#"    ]\n"
 	    	 )
 		 continue
             position += 1
@@ -216,15 +216,15 @@ def evaluate_performance(prices, dps, t, step):
 		insig = "INSIG"
 	    print(
 	        "[synthetic LONG " + insig + "\n"
-	        "    [ITR]  " + str(i - 720) + "\n"
-	        "    [PPB] $" + str(prior_balance) + "\n"
-	        "    [PTV] $" + str(prior_value) + "\n"
-	        "    [CTV] $" + str(prices[i]) + "\n"
-	        "    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
-	        "    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
-	        "    [PTP]  " + str(prev_pos) + "\n"
-	        "    [CPB] $" + str(bank_balance) + "\n"
-		"    ]\n"
+	        #"    [ITR]  " + str(i - 720) + "\n"
+	        #"    [PPB] $" + str(prior_balance) + "\n"
+	        #"    [PTV] $" + str(prior_value) + "\n"
+	        #"    [CTV] $" + str(prices[i]) + "\n"
+	        #"    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
+	        #"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        #"    [PTP]  " + str(prev_pos) + "\n"
+	        #"    [CPB] $" + str(bank_balance) + "\n"
+		#"    ]\n"
 	    )
 	    prev_pos = "LONG"
 	    prior_value = prices[i]
@@ -232,11 +232,11 @@ def evaluate_performance(prices, dps, t, step):
         if dps[i - 720] < -t and position >= 0:
 	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075 and prev_pos != "SHORT":
 	   	 print(
-	        	"[synthetic SHORT INSIG GATE-1\n"
-	        	"    [ITR]  " + str(i - 720) + "\n"
-	        	"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
-	        	"    [PTP]  " + str(prev_pos) + "\n"
-			"    ]\n"
+	        	#"[synthetic SHORT INSIG GATE-1\n"
+	        	#"    [ITR]  " + str(i - 720) + "\n"
+	        	#"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        	#"    [PTP]  " + str(prev_pos) + "\n"
+			#"    ]\n"
 	    	 )
 		 continue
             position -= 1
@@ -249,15 +249,15 @@ def evaluate_performance(prices, dps, t, step):
 		insig = "INSIG"
 	    print(
 	        "[synthetic SHORT " + insig + "\n"
-	        "    [ITR]  " + str(i - 720) + "\n"
-	        "    [PPB] $" + str(prior_balance) + "\n"
-	        "    [PTV] $" + str(prior_value) + "\n"
-	        "    [CTV] $" + str(prices[i]) + "\n"
-	        "    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
-	        "    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
-	        "    [PTP]  " + str(prev_pos) + "\n"
-	        "    [CPB] $" + str(bank_balance) + "\n"
-		"    ]\n"
+	        #"    [ITR]  " + str(i - 720) + "\n"
+	        #"    [PPB] $" + str(prior_balance) + "\n"
+	        #"    [PTV] $" + str(prior_value) + "\n"
+	        #"    [CTV] $" + str(prices[i]) + "\n"
+	        #"    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
+	        #"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        #"    [PTP]  " + str(prev_pos) + "\n"
+	        #"    [CPB] $" + str(bank_balance) + "\n"
+		#"    ]\n"
 	    )
 	    prev_pos = "SHORT"
 	    prior_value = prices[i]
