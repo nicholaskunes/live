@@ -8,7 +8,7 @@ import logging
 
 client = MongoClient()
 database = client['predictor']
-collection = database['gdax']
+collection = database['bitmex']
 tickCount = 0;
 
 logging.basicConfig()
