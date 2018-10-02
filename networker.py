@@ -21,11 +21,11 @@ def tick():
     request_time = time.clock() - start
     date = datetime.now()
     price = float(ticker[0]['price'])
-    v_bid = sum([float(bid[1]) for bid in depth])
-    #v_ask = sum([float(ask[1]) for ask in depth['asks']])
-    #collection.insert({'date': date, 'price': price, 'v_bid': v_bid, 'v_ask': v_ask})
+    v_bid = sum([float(bid['size']) for bid in depth if bid['side'] == "Buy"])
+    v_ask = sum([float(bid['size']) for bid in depth if bid['side'] == "Sell"])
+    collection.insert({'date': date, 'price': price, 'v_bid': v_bid, 'v_ask': v_ask, 'v_bid_inf': float(v_bid / price), 'v_ask_inf': float(v_ask / price)})
     tickCount += 1;
-    print("point: {} req_time: {} date: {} price: {} v_bid: {} v_ask: {}".format(tickCount, request_time, date, price, v_bid, v_ask))
+    print("point: {} req_time: {} date: {} price: {} v_bid: {} v_ask: {} v_bid_inf: {} v_ask_inf: {}".format(tickCount, request_time, date, price, v_bid, v_ask, v_bid_inf, v_ask_inf))
 
 
 def main():
