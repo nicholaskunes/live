@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 client = MongoClient()
 database = client['predictor']
-collection = database['gdax']
+collection = database['bitmex']
 
 positive = 0
 
