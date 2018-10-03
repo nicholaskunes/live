@@ -196,5 +196,5 @@ def evaluate_performance(prices, dps, t, step):
     print "---------- [end key]"
 	
     for i in range(720, len(prices) - 2, step):
-        print(dps[i - 720])
+	print(str(dps[i-720]) + ", " + str(prices[i]))
     return bank_balance
