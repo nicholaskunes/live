@@ -125,7 +125,7 @@ def evaluate_performance(
     print '---------- [    CTF] TRADE FEE DIFF.: the prev. position trade fee added to the cur. to-be-executed trade fee'
     print '---------- [end key]'
 
-    for i in range(720, len(prices) - 2, step):
+    for i in range(720, 720 + 1080, step):
 
         # long position - BUY
 
