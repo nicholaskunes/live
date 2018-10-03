@@ -196,5 +196,86 @@ def evaluate_performance(prices, dps, t, step):
     print "---------- [end key]"
 	
     for i in range(720, len(prices) - 2, step):
+        # long position - BUY
 	print(str(dps[i-720]) + ", " + str(prices[i]))
+        if dps[i - 720] > t and position <= 0:
+	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075 and prev_pos != "LONG":
+	   	 #print(
+	        	#"[synthetic LONG INSIG GATE-1\n"
+	        	#"    [ITR]  " + str(i - 720) + "\n"
+	        	#"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        	#"    [PTP]  " + str(prev_pos) + "\n"
+			#"    ]\n"
+	    	 #)
+		 continue
+            position += 1
+            prior_balance = bank_balance
+            bank_balance -= (prices[i] + (prices[i] * 0.00075))
+	    fees_paid += (prices[i] * 0.00075)
+	    trade_count += 1
+	    insig = "SIGNIF"
+	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075:
+		insig = "INSIG"
+	    #print(
+	    #    "[synthetic LONG " + insig + "\n"
+	        #"    [ITR]  " + str(i - 720) + "\n"
+	        #"    [PPB] $" + str(prior_balance) + "\n"
+	        #"    [PTV] $" + str(prior_value) + "\n"
+	        #"    [CTV] $" + str(prices[i]) + "\n"
+	        #"    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
+	        #"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        #"    [PTP]  " + str(prev_pos) + "\n"
+	        #"    [CPB] $" + str(bank_balance) + "\n"
+		#"    ]\n"
+	    #)
+	    prev_pos = "LONG"
+	    prior_value = prices[i]
+	# short position - SELL
+        if dps[i - 720] < -t and position >= 0:
+	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075 and prev_pos != "SHORT":
+	   	 #print(
+	        	#"[synthetic SHORT INSIG GATE-1\n"
+	        	#"    [ITR]  " + str(i - 720) + "\n"
+	        	#"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        	#"    [PTP]  " + str(prev_pos) + "\n"
+			#"    ]\n"
+	    	 #)
+		 continue
+            position -= 1
+	    prior_balance = bank_balance
+            bank_balance += (prices[i] - (prices[i] * 0.00075))
+	    fees_paid += (prices[i] * 0.00075)
+	    trade_count += 1
+	    insig = "SIGNIF"
+	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075:
+		insig = "INSIG"
+	    #print(
+	        #"[synthetic SHORT " + insig + "\n"
+	        #"    [ITR]  " + str(i - 720) + "\n"
+	        #"    [PPB] $" + str(prior_balance) + "\n"
+	        #"    [PTV] $" + str(prior_value) + "\n"
+	        #"    [CTV] $" + str(prices[i]) + "\n"
+	        #"    [PCD] $" + str(abs(float(prior_value) - float(prices[i]))) + "\n"
+	        #"    [PCS]  " + str(((abs(float(prior_value) - float(prices[i])) / float(prices[i])))) + "\n"
+	        #"    [PTP]  " + str(prev_pos) + "\n"
+	        #"    [CPB] $" + str(bank_balance) + "\n"
+		#"    ]\n"
+	    #)
+	    prev_pos = "SHORT"
+	    prior_value = prices[i]
+	# sell what you bought
+    if position == 1:
+        bank_balance += prices[len(prices) - 1]
+    # pay back what you borrowed
+    if position == -1:
+        bank_balance -= prices[len(prices) - 1]
+    print(
+	"[series statistics " + "\n"
+	"    [length]  " + str(((i - 720) * 10) / 60) + " min.\n"
+	"    [profit] $" + str(bank_balance) + "\n"
+	"    [fees paid] $" + str(fees_paid) + "\n"
+	"    [revenue] $" + str((fees_paid + bank_balance)) + "\n"
+	"    [trades exec.] " + str(trade_count) + "\n"
+	"    ]\n"
+    )
     return bank_balance
