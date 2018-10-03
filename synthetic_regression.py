@@ -196,7 +196,7 @@ def evaluate_performance(prices, dps, t, step):
 	
     for i in range(720, len(prices) - 1, step):
         # long position - BUY
-	print(t)
+	print(dps[i-720])
         if dps[i - 720] > t and position <= 0:
 	    if ((abs(float(prior_value) - float(prices[i])) / float(prices[i]))) < 0.00075 and prev_pos != "LONG":
 	   	 print(
