@@ -4,7 +4,7 @@ from synthetic_regression import *
 
 client = MongoClient()
 database = client['predictor']
-collection = database['gdax']
+collection = database['bitmex']
 
 while True:
 
