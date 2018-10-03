@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
-from synthetic_regression import *
+from pure_prediction import *
 
 client = MongoClient()
 database = client['predictor']
